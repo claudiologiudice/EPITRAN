@@ -96,7 +96,7 @@ $ awk 'FS="\t" {if ($8!="-" && $10>=10 && $13=="-") print}' editing/DnaRna_89202
 $ AnnotateTable.py -a /usr/share/course_data/rnaediting/rptmsk/rmsk_chr21.sorted.gtf.gz -n rmsk -i outTable_892028847_chr21.out -o outTable_892028847_chr21.out.rmsk -u
 
 $ AnnotateTable.py -a /usr/share/course_data/rnaediting/dbsnp/snp151_chr21.sorted.gtf.gz -n snp151 -n snp151 -i outTable_892028847_chr21.out.rmsk -o outTable_892028847_chr21.out.rmsk.snp -u
-For detailed AnnotateTable.p options <a href="https://github.com/BioinfoUNIBA/REDItools/edit/master/README_1.md#annotatetable-py">click here</a>
+For detailed AnnotateTable.py options <a href="https://github.com/BioinfoUNIBA/REDItools/blob/master/README_1.md#annotatetable-py">click here</a>
 
 <b>9) Create a first set of positions selecting sites supported by at least five RNAseq reads and a single mismatch:</b>
 
