@@ -1,4 +1,6 @@
-# EPITRAN course 24/06/21
+# EPITRAN course 24/06/21 
+<a href="mailto:ernesto.picardi@uniba.it ">Ernesto Picardi</a><br>
+<a href="mailto:claudio.logiudice@uniba.it ">Claudio Lo Giudice</a>
 <p align="justify"> Epitranscriptome refers to all biochemical RNA modifications affecting cellular RNAs. 
 To date, >150 different RNA modifications have been discovered, and, among them, RNA editing represents the most prominent post-transcriptional mechanism.<br> 
 In mammals, it involves the deamination of cytosine to uridine or, more commonly, the conversion of adenosine to inosine (A-to-I) and, concurrently with alternative splicing, increases the diversity of the eukaryotic transcriptome and proteome.<br>
@@ -135,3 +137,15 @@ $ mv outTable_892028847_chr21.out.rmsk.snp.alu.ed alu
 $ mv outTable_892028847_chr21.out.rmsk.snp.nonalu.ed nonalu
 
 $ mv outTable_892028847_chr21.out.rmsk.snp.nonrep.ed nonrep
+
+$ cat alu nonalu nonrep > alu-nonalu-nonrep
+
+$ awk 'FS="\t" {if ($19=="ed") print}' alu-nonalu-nonrep > knownEditing 
+
+<b>16) Convert editing candidates ($19!="ed" selects novel RNA editing events.) in REP NON ALU and NON REP sites in GFF format for further filtering:</b>
+
+$ cat nonalu nonrep > nonalu-nonrep
+
+$ awk 'FS="\t" {if ($19!="ed") print}' nonalu-nonrep > pos.txt
+
+<b>17)</b>
