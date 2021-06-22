@@ -156,3 +156,7 @@ For detailed TableToGFF.py options <a href="https://github.com/BioinfoUNIBA/REDI
 $ awk 'FS="\t" {if ($19!="ed") print}' alu > posalu.txt
 
 $ TableToGFF.py -i posalu.txt -s -t -o posalu.gff
+
+<b>18) Launch REDItoolDnaRna.py on ALU sites using stringent criteria to recover potential editing candidates:</b>
+
+$ REDItoolDnaRn.py -s 2 -g 2 -S -t 4 -i ./RNAseq/SRR1310520_chr21_Aligned.sortedByCoord.out.bam -f /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa -c 5,5 -q 30,30 -m 255,255 -O 5,5 -p -u -a 11-6 -l -v 1 -n 0.0 -e -T posalu.sorted.gff.gz -w /usr/share/course_data/rnaediting/Gencode_annotation/gencode.v30lift37.chr21.splicesites.txt -k /usr/share/course_data/rnaediting/hg19ref/nochr -R -o firstalu
