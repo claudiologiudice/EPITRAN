@@ -120,9 +120,17 @@ $ awk 'FS="\t" {if ($1!="chrM" && substr($16,1,3)!="Alu" && $15!="-" && $15!="Si
 $ awk 'FS="\t" {if ($1!="chrM" && substr($16,1,3)!="Alu" && $15=="-" && $17=="-" && $8!="-" && $10>=10 && $14<=0.05 && $9>=0.1) print}' outTable_892028847_chr21.out.rmsk.snp.sel2 > outTable_892028847_chr21.out.rmsk.snp.nonrep
 
 <b>14) Annotate ALU, REP NON ALU and NON REP sites using known editing events from REDIportal:</b>
+
 $ AnnotateTable.py -a /usr/share/course_data/rnaediting/rediportal/atlas.gtf.gz -n ed -k R  -c 1 -i outTable_892028847_chr21.out.rmsk.snp.alu -o outTable_892028847_chr21.out.rmsk.snp.alu.ed -u
 
 $ AnnotateTable.py -a /usr/share/course_data/rnaediting/rediportal/atlas.gtf.gz -n ed -k R  -c 1 -i outTable_892028847_chr21.out.rmsk.snp.nonalu -o outTable_892028847_chr21.out.rmsk.snp.nonalu.ed -u
 
 $ AnnotateTable.py -a /usr/share/course_data/rnaediting/rediportal/atlas.gtf.gz -n ed -k R  -c 1 -i outTable_892028847_chr21.out.rmsk.snp.nonrep -o outTable_892028847_chr21.out.rmsk.snp.nonrep.ed -u
 
+<b>15) Extract known editing events from ALU, REP NON ALU and NON REP sites:</b>
+
+$ mv outTable_892028847_chr21.out.rmsk.snp.alu.ed alu
+
+$ mv outTable_892028847_chr21.out.rmsk.snp.nonalu.ed nonalu
+
+$ mv outTable_892028847_chr21.out.rmsk.snp.nonrep.ed nonrep
