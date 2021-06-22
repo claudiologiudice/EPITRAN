@@ -148,4 +148,11 @@ $ cat nonalu nonrep > nonalu-nonrep
 
 $ awk 'FS="\t" {if ($19!="ed") print}' nonalu-nonrep > pos.txt
 
-<b>17)</b>
+$TableToGFF.py -i pos.txt -s -t -o pos.gff
+For detailed TableToGFF.py options <a href="https://github.com/BioinfoUNIBA/REDItools/blob/master/README_1.md#tabletogff-py-new-in-version-1-0-3">click here</a>
+
+<b>17) Convert editing candidates in ALU sites in GFF format for further filtering:</b>
+
+$ awk 'FS="\t" {if ($19!="ed") print}' alu > posalu.txt
+
+$ TableToGFF.py -i posalu.txt -s -t -o posalu.gff
