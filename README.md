@@ -183,7 +183,21 @@ $ samtools fixmate -@ 4 -m SRR1310520_chr21_bed_ns.bam  SRR1310520_chr21_bed_ns_
 
 $ samtools sort -@ 4 SRR1310520_chr21_bed_ns_fx.bam -o SRR1310520_chr21_bed_ns_fx_st.bam
 
-samtools markdup -r -@ 4 SRR1310520_chr21_bed_ns_fx_st.bam SRR1310520_chr21_bed_dedup.bam
+$ samtools markdup -r -@ 4 SRR1310520_chr21_bed_ns_fx_st.bam SRR1310520_chr21_bed_dedup.bam
 
+$ samtools index SRR1310520_chr21_bed_dedup.bam
+
+<b>22) Re-run REDItoolDnaRna.py on REP NON ALU and NON REP sites using stringent criteria, deduplicated reads and mis-mapping info:</b>
+
+$ REDItoolDnaRna.py -s 2 -g 2 -S -t 4 -i SRR1310520_chr21_bed_dedup.bam -f /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa -c 10,10 -q 30,30 -m 255,255 -O 5,5 -p -u -a 11-6 -l -v 3 -n 0.1 -e -T pos.sorted.gff.gz -w /usr/share/course_data/rnaediting/Gencode_annotation/gencode.v30lift37.chr21.splicesites.txt -R -k /usr/share/course_data/rnaediting/hg19ref/nochr -b badreads.txt --rmIndels -o second
   
+<b>23) Collect filtered ALU, REP NON ALU and NON REP sites:</b>
+
+$ collect_editing_candidates.py
+
+$ sort -k1,1 -k2,2n editing.txt > editing_sorted.txt
+
+<b>24) Inspect the distribution of editing candidates to look at A-to-I enrichment: </b>
+
+$ get_Statistics.py
   
