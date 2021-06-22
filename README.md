@@ -15,9 +15,10 @@ Today, we are going to reproduce step-by-step a bioinformatics pipeline aimed to
 
 <p> 
 The main steps described during the practice are reported below and can be easily copy/pasted in your terminal.
-<b>Note.</b> Assuming you're traineeX, please change X according to your workspace.
-<b>Note2.</b> Choose a GTEX sample from Cerebellum or Lung and copy DNAseq/RNAseq accordingly in your home folder.
-
+<b>Note.</b> Assuming you're traineeX, please change X according to your workspace.<br>
+<b>Note2.</b> Choose a GTEX sample from Cerebellum or Lung and copy DNAseq/RNAseq accordingly in your home folder.<br>
+<b>IMPORTANT! REDItoolDnaRna.py outTable (eg. outTable_892028847) contains 8digit random number, so it usually varies among users and different script launches on the same machine.
+  
 <table>
 <thead>
 <th>Sample</th>
@@ -84,7 +85,7 @@ $ cp ../data/rnaediting/DNAseq/Lung* .
 
 <b>6) Detect all potential DNA–RNA variants in your data (limited to chromosome 21) using the REDItoolDnaRNA.py script:</b>
 
-$ REDItoolDnaRnaGTEX.py -i ./RNAseq/SRR1310520_chr21_Aligned.sortedByCoord.out.bam -j ./DNAseq/Lung_sorted.bam -o editing -f /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa  -c1,1 -m30,255 -v1 -q30,30 -e -n0.0 -N0.0 -u -l -p -s2 -g2  -S -Y chr21:1-48129895
+$ REDItoolDnaRna.py -i ./RNAseq/SRR1310520_chr21_Aligned.sortedByCoord.out.bam -j ./DNAseq/Lung_sorted.bam -o editing -f /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa  -c1,1 -m30,255 -v1 -q30,30 -e -n0.0 -N0.0 -u -l -p -s2 -g2  -S -Y chr21:1-48129895
 For detailed REDItoolDnaRnaGTEX.py options <a href="https://github.com/BioinfoUNIBA/REDItools/blob/master/README_1.md#reditooldnarna-py">click here</a>
 
 <b>7) Exclude invariant positions as well as positions not supported by ≥10 WGS reads:</b>
