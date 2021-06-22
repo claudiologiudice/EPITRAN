@@ -159,4 +159,30 @@ $ TableToGFF.py -i posalu.txt -s -t -o posalu.gff
 
 <b>18) Launch REDItoolDnaRna.py on ALU sites using stringent criteria to recover potential editing candidates:</b>
 
-$ REDItoolDnaRn.py -s 2 -g 2 -S -t 4 -i ./RNAseq/SRR1310520_chr21_Aligned.sortedByCoord.out.bam -f /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa -c 5,5 -q 30,30 -m 255,255 -O 5,5 -p -u -a 11-6 -l -v 1 -n 0.0 -e -T posalu.sorted.gff.gz -w /usr/share/course_data/rnaediting/Gencode_annotation/gencode.v30lift37.chr21.splicesites.txt -k /usr/share/course_data/rnaediting/hg19ref/nochr -R -o firstalu
+$ REDItoolDnaRna.py -s 2 -g 2 -S -t 4 -i ./RNAseq/SRR1310520_chr21_Aligned.sortedByCoord.out.bam -f /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa -c 5,5 -q 30,30 -m 255,255 -O 5,5 -p -u -a 11-6 -l -v 1 -n 0.0 -e -T posalu.sorted.gff.gz -w /usr/share/course_data/rnaediting/Gencode_annotation/gencode.v30lift37.chr21.splicesites.txt -k /usr/share/course_data/rnaediting/hg19ref/nochr -R -o firstalu
+
+<b>19) Launch REDItoolDnaRna.py on REP NON ALU and NON REP sites using stringent criteria to recover RNAseq reads harboring reference mismatches:</b>
+
+$ REDItoolDnaRnaGTEX.py -s 2 -g 2 -S -t 4 -i ./RNAseq/SRR1310520_chr21_Aligned.sortedByCoord.out.bam -f /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa -c 10,10 -q 30,30 -m 255,255 -O 5,5 -p -u -a 11-6 -l -v 3 -n 0.1 -e -T pos.sorted.gff.gz -w /usr/share/course_data/rnaediting/Gencode_annotation/gencode.v30lift37.chr21.splicesites.txt -k /usr/share/course_data/rnaediting/hg19ref/nochr --reads -R --addP -o first
+
+<b>20) Launch pblat on RNAseq reads harboring reference mismatches from previous step and select multimapping reads:
+$ pblat -t=dna -q=rna -stepSize=5 -repMatch=2253 -minScore=20 -minIdentity=0 /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa first/DnaRna_304977045/outReads_304977045 reads.psl
+
+$ readPsl.py reads.psl badreads.txt
+
+<b>21) Extract RNAseq reads harboring reference mismatches from Step 19 and remove duplicates:</b>
+  
+$ sort -k1,1 -k2,2n -k3,3n first/DnaRna_595685947/outReads_595685947 | mergeBed > bed 
+
+$ samtools view -@ 4 -L bed -h -b ./RNAseq/SRR1310520_chr21_Aligned.sortedByCoord.out.bam > SRR1310520_chr21_bed.bam
+
+$ samtools sort -@ 4 -n SRR1310520_chr21_bed.bam -o SRR1310520_chr21_bed_ns.bam 
+
+$ samtools fixmate -@ 4 -m SRR1310520_chr21_bed_ns.bam  SRR1310520_chr21_bed_ns_fx.bam 
+
+$ samtools sort -@ 4 SRR1310520_chr21_bed_ns_fx.bam -o SRR1310520_chr21_bed_ns_fx_st.bam
+
+samtools markdup -r -@ 4 SRR1310520_chr21_bed_ns_fx_st.bam SRR1310520_chr21_bed_dedup.bam
+
+  
+  
