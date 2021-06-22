@@ -165,7 +165,8 @@ $ REDItoolDnaRna.py -s 2 -g 2 -S -t 4 -i ./RNAseq/SRR1310520_chr21_Aligned.sorte
 
 $ REDItoolDnaRnaGTEX.py -s 2 -g 2 -S -t 4 -i ./RNAseq/SRR1310520_chr21_Aligned.sortedByCoord.out.bam -f /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa -c 10,10 -q 30,30 -m 255,255 -O 5,5 -p -u -a 11-6 -l -v 3 -n 0.1 -e -T pos.sorted.gff.gz -w /usr/share/course_data/rnaediting/Gencode_annotation/gencode.v30lift37.chr21.splicesites.txt -k /usr/share/course_data/rnaediting/hg19ref/nochr --reads -R --addP -o first
 
-<b>20) Launch pblat on RNAseq reads harboring reference mismatches from previous step and select multimapping reads:
+<b>20) Launch pblat on RNAseq reads harboring reference mismatches from previous step and select multimapping reads:</b>
+
 $ pblat -t=dna -q=rna -stepSize=5 -repMatch=2253 -minScore=20 -minIdentity=0 /usr/share/course_data/rnaediting/hg19ref/GRCh37.primary_assembly.genome.fa first/DnaRna_304977045/outReads_304977045 reads.psl
 
 $ readPsl.py reads.psl badreads.txt
